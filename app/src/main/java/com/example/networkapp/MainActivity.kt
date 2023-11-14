@@ -2,6 +2,7 @@ package com.example.networkapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -21,11 +22,11 @@ import org.json.JSONObject
 class MainActivity : AppCompatActivity() {
 
     private lateinit var requestQueue: RequestQueue
-    lateinit var titleTextView: TextView
-    lateinit var descriptionTextView: TextView
-    lateinit var numberEditText: EditText
-    lateinit var showButton: Button
-    lateinit var comicImageView: ImageView
+    private lateinit var titleTextView: TextView
+    private lateinit var descriptionTextView: TextView
+    private lateinit var numberEditText: EditText
+    private lateinit var showButton: Button
+    private lateinit var comicImageView: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         comicImageView = findViewById<ImageView>(R.id.comicImageView)
 
         showButton.setOnClickListener {
+            Log.d("Button", "Clicked")
             downloadComic(numberEditText.text.toString())
         }
 
@@ -47,7 +49,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun downloadComic (comicId: String) {
         val url = "https://xkcd.com/$comicId/info.0.json"
-        requestQueue.add (
+        Volley.newRequestQueue(this).add (
             JsonObjectRequest(url, {showComic(it)}, {
             })
         )
