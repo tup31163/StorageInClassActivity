@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity() {
         comicImageView = findViewById<ImageView>(R.id.comicImageView)
 
         showButton.setOnClickListener {
-            Log.d("Button", numberEditText.text.toString())
             downloadComic(numberEditText.text.toString())
         }
 
