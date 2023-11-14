@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         comicImageView = findViewById<ImageView>(R.id.comicImageView)
 
         showButton.setOnClickListener {
-            Log.d("Button", "Clicked")
+            Log.d("Button", numberEditText.text.toString())
             downloadComic(numberEditText.text.toString())
         }
 
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun downloadComic (comicId: String) {
         val url = "https://xkcd.com/$comicId/info.0.json"
-        Volley.newRequestQueue(this).add (
+        requestQueue.add (
             JsonObjectRequest(url, {showComic(it)}, {
             })
         )
